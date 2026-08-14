@@ -1,15 +1,25 @@
 import React, { useEffect } from 'react';
 
+import { Button } from './ui/button';
+import { Input } from './ui/input';
+
+
+// COMPONENT
 function TaskManager() {
+
+  // USESTATE
   const [tasks, setTasks] = React.useState([]);
   const [task, setTask] = React.useState('');
 
+
+  // USEEFFECT
   useEffect(() => {
     console.log('Task berubah:', tasks);
   }, [tasks]);
 
 
   const addTask = () => {
+
     if (task === '') return;
 
     const newTask = {
@@ -24,6 +34,7 @@ function TaskManager() {
 
 
   const doneTask = (id) => {
+
     setTasks(
       tasks.map((task) =>
         task.id === id
@@ -35,6 +46,7 @@ function TaskManager() {
 
 
   const deleteTask = (id) => {
+
     setTasks(
       tasks.filter((task) => task.id !== id)
     );
@@ -46,28 +58,31 @@ function TaskManager() {
 
       <div className="border text-center rounded-lg w-100 bg-white p-6 shadow-sm">
 
-        <h3 className="text-2xl font-bold mb-4">
-            Task harian
+        <h3 className="text-2xl font-bold mb-4 text-gray-700">
+          Task Harian
         </h3>
+
 
         <div className="flex gap-2 mb-5">
 
-          <input
+          {/* SHADCN INPUT */}
+          <Input
             value={task}
             onChange={(e) => setTask(e.target.value)}
             placeholder="Masukkan task..."
-            className="border bg-white px-3 py-2 rounded-lg flex-1"
           />
 
-          <button
-            className="bg-gray-500 text-white px-4 py-2 rounded-lg"
-            onClick={addTask}
-          >
+
+          {/* SHADCN BUTTON */}
+          <Button
+            onClick={addTask} className="bg-gray-500 text-white hover:bg-gray-600 ">
             Tambah
-          </button>
+          </Button>
 
         </div>
 
+
+        {/* CONDITIONAL RENDERING */}
 
         {tasks.length === 0 ? (
 
@@ -99,19 +114,30 @@ function TaskManager() {
 
                 <div className="flex gap-2">
 
-                  <button
-                    className="text-green-500"
+                  {/* SHADCN BUTTON */}
+
+                  <Button
+                    variant="outline"
+                    size="sm"
                     onClick={() => doneTask(task.id)}
                   >
-                    {task.done ? 'Batal' : 'Selesai'}
-                  </button>
 
-                  <button
-                    className="text-red-500"
+                    {/* CONDITIONAL RENDERING */}
+
+                    {task.done ? 'Batal' : 'Selesai'}
+
+                  </Button>
+
+
+                  {/* SHADCN BUTTON */}
+
+                  <Button
+                    variant="destructive"
+                    size="sm"
                     onClick={() => deleteTask(task.id)}
                   >
                     Hapus
-                  </button>
+                  </Button>
 
                 </div>
 

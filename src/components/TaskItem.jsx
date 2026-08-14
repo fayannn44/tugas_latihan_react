@@ -1,9 +1,19 @@
 import React from 'react';
 
-function TaskItem({task,doneTask,deleteTask
-}) {
+import { Button } from './ui/button';
+
+
+// COMPONENT
+//
+// PROPS
+// task
+// doneTask
+// deleteTask
+function TaskItem({ task,doneTask,deleteTask}) {
 
   return (
+
+    // FRAGMENT
     <>
       <div className="border p-3 mb-2 rounded flex justify-between items-center">
 
@@ -20,25 +30,36 @@ function TaskItem({task,doneTask,deleteTask
 
         <div className="flex gap-2">
 
-          <button
+          {/* SHADCN BUTTON */}
+
+          <Button
+            variant="outline"
+            size="sm"
             onClick={() => doneTask(task.id)}
-            className="text-sm text-green-600"
           >
+
+            {/* CONDITIONAL RENDERING */}
+
             {task.done ? 'Batal' : 'Selesai'}
-          </button>
+
+          </Button>
 
 
-          <button
+          {/* SHADCN BUTTON */}
+
+          <Button
+            variant="destructive"
+            size="sm"
             onClick={() => deleteTask(task.id)}
-            className="text-sm text-red-500"
           >
             Hapus
-          </button>
+          </Button>
 
         </div>
 
       </div>
     </>
+
   );
 }
 
